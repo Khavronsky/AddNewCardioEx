@@ -1,45 +1,77 @@
 package com.khavronsky.addnewcardioex;
 
 
+import java.util.List;
+
 class CardioExerciseModel {
-    private String exerciseTitle;
-    private int sets;
-    private int repeats;
-    private int weight;
+    private String mExerciseTitle;
+    private List<String> mCountingCaloriesMethod;
+    private List<String> mIntensityType;
+    private int mBurnedPerHour;
+    private int mLowIntensity;
+    private int mMiddleIntensity;
+    private int mHighIntensity;
 
     public String getExerciseTitle() {
-        return exerciseTitle;
+        return mExerciseTitle;
     }
 
     public CardioExerciseModel setExerciseTitle(final String exerciseTitle) {
-        this.exerciseTitle = exerciseTitle;
+        this.mExerciseTitle = exerciseTitle;
         return this;
     }
 
-    public int getSets() {
-        return sets;
+    public List<String> getCountingCaloriesMethod() {
+        return mCountingCaloriesMethod;
     }
 
-    public CardioExerciseModel setSets(final int sets) {
-        this.sets = sets;
+    public CardioExerciseModel setCountingCaloriesMethod(final List<String> countingCaloriesMethod) {
+        mCountingCaloriesMethod = countingCaloriesMethod;
         return this;
     }
 
-    public int getRepeats() {
-        return repeats;
+    public List<String> getIntensityType() {
+        return mIntensityType;
     }
 
-    public CardioExerciseModel setRepeats(final int repeats) {
-        this.repeats = repeats;
+    public CardioExerciseModel setIntensityType(final List<String> intensityType) {
+        mIntensityType = intensityType;
         return this;
     }
 
-    public int getWeight() {
-        return weight;
+    public int getBurnedPerHour() {
+        return mBurnedPerHour;
     }
 
-    public CardioExerciseModel setWeight(final int weight) {
-        this.weight = weight;
+    public CardioExerciseModel setBurnedPerHour(final int burnedPerHour) {
+        mBurnedPerHour = burnedPerHour;
+        return this;
+    }
+
+    public int getLowIntensity() {
+        return mLowIntensity;
+    }
+
+    public CardioExerciseModel setLowIntensity(final int lowIntensity) {
+        this.mLowIntensity = lowIntensity;
+        return this;
+    }
+
+    public int getMiddleIntensity() {
+        return mMiddleIntensity;
+    }
+
+    public CardioExerciseModel setMiddleIntensity(final int middleIntensity) {
+        this.mMiddleIntensity = middleIntensity;
+        return this;
+    }
+
+    public int getHighIntensity() {
+        return mHighIntensity;
+    }
+
+    public CardioExerciseModel setHighIntensity(final int highIntensity) {
+        this.mHighIntensity = highIntensity;
         return this;
     }
 }

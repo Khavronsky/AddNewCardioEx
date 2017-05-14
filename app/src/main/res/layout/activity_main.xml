@@ -45,9 +45,76 @@
                     android:layout_height="wrap_content"
                     android:hint="Название упражнения"
                     android:inputType="text"
-                    android:textSize="16sp"
-                    android:textColor="@color/gray2" />
+                    android:textColor="@color/gray2"
+                    android:textSize="16sp" />
             </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Принцип расчета калорий"
+                    android:textColor="@color/gray2"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@color/gray1">
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Интенсивность"
+                    android:textColor="@color/gray2"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@color/gray1">
+
+                </FrameLayout>
+            </LinearLayout>
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -60,9 +127,10 @@
                     android:id="@+id/ex_sets"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Число подходов"
+                    android:hint="Низкая нагрузка (значение МЕТ)"
                     android:inputType="number"
                     android:textSize="16sp" />
+
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -76,7 +144,7 @@
                     android:id="@+id/ex_repeats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Повторений в подходе"
+                    android:hint="Средняя нагрузка (значение МЕТ)"
                     android:inputType="number"
                     android:textSize="16sp" />
             </android.support.design.widget.TextInputLayout>
@@ -92,7 +160,7 @@
                     android:id="@+id/ex_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Вес за подход"
+                    android:hint="Высокая нагрузка (значение МЕТ)"
                     android:inputType="number"
                     android:textSize="16sp" />
             </android.support.design.widget.TextInputLayout>
@@ -102,13 +170,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:textSize="14sp"
                 android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
-                android:textColor="#6b7485"
                 android:lineSpacingExtra="6sp"
-                android:text="ONETRAK считает калории только для упражнений из раздела «Кардио», так как оценка сожженных калорий от выполнения силовых упражнений зависит от ряда факторов: насколько энергично вы выполняли упражнение, сколько отдыхали между подходами и тд. Вы можете найти «Силовые тренировки» в разделе «кардио», но следует помнить,что эта оценка может иметь погрешности. Если у вас есть данные о количестве сожженных калорий для того или иного вида активности (например,  с ЧСС-датчика), вы можете добавить их как новую тренировку в раздел «Мои упражнения» и далее использовать в своем дневнике."
-                />
+                android:text="MET (от англ. Metabolic Equivalent of Task) - метаболический эквивалент задачи или количество энергии, которое человек потребляет в течение 1 минуты пребывания в сидячем положении. Различные виды активности требуют различного МЕТ. Для более точного подсчета сожженных калорий, при добавлении нового упражнения, указывайте значения МЕТ для разных типов интенсивности его выполнения."
+                android:textColor="#6b7485"
+                android:textSize="14sp"
+                android:textStyle="normal" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

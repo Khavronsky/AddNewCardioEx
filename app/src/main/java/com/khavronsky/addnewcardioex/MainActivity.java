@@ -8,16 +8,22 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar mToolbar;
-    EditText exTitle ;
-    EditText exSets ;
-    EditText exRepeats ;
-    EditText exWeight ;
+
+    EditText exTitle;
+
+    EditText exSets;
+
+    EditText exRepeats;
+
+    EditText exWeight;
 
     TextWatcher mTextWatcher;
 
@@ -29,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setToolbar();
         setEditText(mCardioExerciseModel);
         setCardioExerciseModel(new CardioExerciseModel());
+
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+
+// Настраиваем адаптер
+        ArrayAdapter<?> adapter = ArrayAdapter
+                .createFromResource(this, R.array.calc_calories, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+//        ArrayAdapter<?> adapter2 = ArrayAdapter
+//                .createFromResource(this, R.array.type_of_intensity, android.R.layout.simple_spinner_item);
+//        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+                mCardioExerciseModel.getIntensityType());
+
+// Вызываем адаптер
+        spinner.setAdapter(adapter);
+        spinner2.setAdapter(adapter2);
     }
 
     private void setEditText(CardioExerciseModel cardioExerciseModel) {
@@ -48,11 +72,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (cardioExerciseModel != null) {
 
             exTitle.setText(cardioExerciseModel.getExerciseTitle());
-            exSets.setText(cardioExerciseModel.getSets());
-            exRepeats.setText(cardioExerciseModel.getRepeats());
-            exWeight.setText(cardioExerciseModel.getWeight());
+            exSets.setText(cardioExerciseModel.getLowIntensity());
+            exRepeats.setText(cardioExerciseModel.getMiddleIntensity());
+            exWeight.setText(cardioExerciseModel.getHighIntensity());
         }
-        mTextWatcher =    new TextWatcher() {
+        mTextWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(final CharSequence s, final int start, final int count,
                     final int after) {
@@ -65,10 +89,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void afterTextChanged(final Editable s) {
                 try {
-                    if(Integer.parseInt(String.valueOf(s)) == 0){
+                    if (Integer.parseInt(String.valueOf(s)) == 0) {
                         s.clear();
                     }
-                } catch (NumberFormatException e) {}
+                } catch (NumberFormatException e) {
+                }
             }
         };
         exTitle.addTextChangedListener(mTextWatcher);
@@ -91,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mToolbar.setNavigationIcon(R.drawable.arrow_back);
     }
 
-    private boolean saveExercise(){
+    private boolean saveExercise() {
         if (exTitle.getText().length() == 0) {
             Toast.makeText(this, "Ойойой1", Toast.LENGTH_SHORT).show();
             return false;
@@ -108,14 +133,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Ойойой4", Toast.LENGTH_SHORT).show();
             return false;
         }
-        mCardioExerciseModel.setExerciseTitle (String.valueOf(exTitle.getText()))
-                            .setSets (Integer.parseInt(String.valueOf(exSets.getText())))
-                            .setRepeats (Integer.parseInt(String.valueOf(exRepeats.getText())))
-                            .setWeight (Integer.parseInt(String.valueOf(exWeight.getText())));
+        mCardioExerciseModel.setExerciseTitle(String.valueOf(exTitle.getText()))
+                .setLowIntensity(Integer.parseInt(String.valueOf(exSets.getText())))
+                .setMiddleIntensity(Integer.parseInt(String.valueOf(exRepeats.getText())))
+                .setHighIntensity(Integer.parseInt(String.valueOf(exWeight.getText())));
         return true;
     }
-
-
 
 
     @Override
