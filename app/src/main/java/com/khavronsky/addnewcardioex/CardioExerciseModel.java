@@ -1,7 +1,7 @@
-package com.khavronsky.addnewpowerex;
+package com.khavronsky.addnewcardioex;
 
 
-class PowerExerciseModel {
+class CardioExerciseModel {
     private String exerciseTitle;
     private int sets;
     private int repeats;
@@ -11,7 +11,7 @@ class PowerExerciseModel {
         return exerciseTitle;
     }
 
-    public PowerExerciseModel setExerciseTitle(final String exerciseTitle) {
+    public CardioExerciseModel setExerciseTitle(final String exerciseTitle) {
         this.exerciseTitle = exerciseTitle;
         return this;
     }
@@ -20,7 +20,7 @@ class PowerExerciseModel {
         return sets;
     }
 
-    public PowerExerciseModel setSets(final int sets) {
+    public CardioExerciseModel setSets(final int sets) {
         this.sets = sets;
         return this;
     }
@@ -29,7 +29,7 @@ class PowerExerciseModel {
         return repeats;
     }
 
-    public PowerExerciseModel setRepeats(final int repeats) {
+    public CardioExerciseModel setRepeats(final int repeats) {
         this.repeats = repeats;
         return this;
     }
@@ -38,7 +38,7 @@ class PowerExerciseModel {
         return weight;
     }
 
-    public PowerExerciseModel setWeight(final int weight) {
+    public CardioExerciseModel setWeight(final int weight) {
         this.weight = weight;
         return this;
     }

@@ -1,4 +1,4 @@
-package com.khavronsky.addnewpowerex;
+package com.khavronsky.addnewcardioex;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextWatcher mTextWatcher;
 
-    private PowerExerciseModel mPowerExerciseModel;
+    private CardioExerciseModel mCardioExerciseModel;
 
-    public MainActivity setPowerExerciseModel(final PowerExerciseModel powerExerciseModel) {
-        mPowerExerciseModel = powerExerciseModel;
+    public MainActivity setCardioExerciseModel(final CardioExerciseModel cardioExerciseModel) {
+        mCardioExerciseModel = cardioExerciseModel;
         return this;
     }
 
@@ -36,21 +36,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
         setToolbar();
-        setEditText(mPowerExerciseModel);
-        setPowerExerciseModel(new PowerExerciseModel());
+        setEditText(mCardioExerciseModel);
+        setCardioExerciseModel(new CardioExerciseModel());
     }
 
-    private void setEditText(PowerExerciseModel powerExerciseModel) {
+    private void setEditText(CardioExerciseModel cardioExerciseModel) {
         exTitle = (EditText) findViewById(R.id.ex_title);
         exSets = (EditText) findViewById(R.id.ex_sets);
         exRepeats = (EditText) findViewById(R.id.ex_repeats);
         exWeight = (EditText) findViewById(R.id.ex_weight);
-        if (powerExerciseModel != null) {
+        if (cardioExerciseModel != null) {
 
-            exTitle.setText(powerExerciseModel.getExerciseTitle());
-            exSets.setText(powerExerciseModel.getSets());
-            exRepeats.setText(powerExerciseModel.getRepeats());
-            exWeight.setText(powerExerciseModel.getWeight());
+            exTitle.setText(cardioExerciseModel.getExerciseTitle());
+            exSets.setText(cardioExerciseModel.getSets());
+            exRepeats.setText(cardioExerciseModel.getRepeats());
+            exWeight.setText(cardioExerciseModel.getWeight());
         }
         mTextWatcher =    new TextWatcher() {
             @Override
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Ойойой4", Toast.LENGTH_SHORT).show();
             return false;
         }
-        mPowerExerciseModel.setExerciseTitle (String.valueOf(exTitle.getText()))
+        mCardioExerciseModel.setExerciseTitle (String.valueOf(exTitle.getText()))
                             .setSets (Integer.parseInt(String.valueOf(exSets.getText())))
                             .setRepeats (Integer.parseInt(String.valueOf(exRepeats.getText())))
                             .setWeight (Integer.parseInt(String.valueOf(exWeight.getText())));

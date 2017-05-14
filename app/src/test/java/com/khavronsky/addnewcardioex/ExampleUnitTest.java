@@ -1,4 +1,4 @@
-package com.khavronsky.addnewpowerex;
+package com.khavronsky.addnewcardioex;
 
 import org.junit.Test;
 
