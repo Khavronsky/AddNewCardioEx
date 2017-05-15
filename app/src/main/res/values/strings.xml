@@ -3,15 +3,9 @@
     <string-array name="calc_calories">
         <item>Калорий в час на 1 кг веса</item>
         <item>Значение MET</item>
-        <item>Рандомный расчет</item>
-        <item>Расчетный рандом</item>
-        <item>Зачотный кондом</item>
     </string-array>
     <string-array name="type_of_intensity">
         <item>Не указывать</item>
         <item>Указывать тип интенсивности</item>
-        <item>Указывать тип, но без интенсивности</item>
-        <item>Интенсивно указывать, но без типа</item>
-        <item>Типа интенсивно, но не указательно</item>
     </string-array>
 </resources>

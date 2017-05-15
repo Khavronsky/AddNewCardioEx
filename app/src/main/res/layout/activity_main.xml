@@ -40,12 +40,12 @@
                 app:errorTextAppearance="@style/HintTextStyle">
 
                 <EditText
-                    android:id="@+id/ex_title"
+                    android:id="@+id/ex_cardio_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Название упражнения"
                     android:inputType="text"
-                    android:textColor="@color/gray2"
+                    android:textColor="@color/gray5"
                     android:textSize="16sp" />
             </android.support.design.widget.TextInputLayout>
 
@@ -67,7 +67,7 @@
                     android:textStyle="normal" />
 
                 <Spinner
-                    android:id="@+id/spinner"
+                    android:id="@+id/ex_cardio_count_method"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
@@ -100,7 +100,7 @@
                     android:textStyle="normal" />
 
                 <Spinner
-                    android:id="@+id/spinner2"
+                    android:id="@+id/ex_cardio_Intensity_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
@@ -115,7 +115,6 @@
                 </FrameLayout>
             </LinearLayout>
 
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,7 +123,23 @@
                 app:errorTextAppearance="@style/HintTextStyle">
 
                 <EditText
-                    android:id="@+id/ex_sets"
+                    android:id="@+id/ex_cardio_burned_per_hour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Сожжено калорий в час"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+
+                app:errorTextAppearance="@style/HintTextStyle">
+
+                <EditText
+                    android:id="@+id/ex_cardio_low_intensity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Низкая нагрузка (значение МЕТ)"
@@ -141,7 +156,7 @@
                 app:errorTextAppearance="@style/HintTextStyle">
 
                 <EditText
-                    android:id="@+id/ex_repeats"
+                    android:id="@+id/ex_cardio_middle_intensity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Средняя нагрузка (значение МЕТ)"
@@ -157,7 +172,7 @@
                 app:errorTextAppearance="@style/HintTextStyle">
 
                 <EditText
-                    android:id="@+id/ex_weight"
+                    android:id="@+id/ex_cardio_high_intensity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Высокая нагрузка (значение МЕТ)"
@@ -170,7 +185,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:fontFamily="sans-serif-light"
                 android:lineSpacingExtra="6sp"
                 android:text="MET (от англ. Metabolic Equivalent of Task) - метаболический эквивалент задачи или количество энергии, которое человек потребляет в течение 1 минуты пребывания в сидячем положении. Различные виды активности требуют различного МЕТ. Для более точного подсчета сожженных калорий, при добавлении нового упражнения, указывайте значения МЕТ для разных типов интенсивности его выполнения."
                 android:textColor="#6b7485"

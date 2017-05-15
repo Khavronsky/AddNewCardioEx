@@ -1,5 +1,7 @@
 package com.khavronsky.addnewcardioex;
 
+import com.khavronsky.addnewcardioex.CardioExerciseModel.IntensityType;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,69 +15,100 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    EditText exTitle;
+    @BindView(R.id.ex_cardio_title)
+    EditText mTitle;
 
-    EditText exSets;
+    @BindView(R.id.ex_cardio_burned_per_hour)
+    EditText mBurnedPerHour;
 
-    EditText exRepeats;
+    @BindView(R.id.ex_cardio_low_intensity)
+    EditText mLowIntensity;
 
-    EditText exWeight;
+    @BindView(R.id.ex_cardio_middle_intensity)
+    EditText mMiddleIntensity;
 
-    TextWatcher mTextWatcher;
+    @BindView(R.id.ex_cardio_high_intensity)
+    EditText mHighIntensity;
+
+    @BindView(R.id.ex_cardio_count_method)
+    Spinner mCountCalMethod;
+
+    @BindView(R.id.ex_cardio_Intensity_type)
+    Spinner mIntensityType;
+
+    private TextWatcher mTextWatcher;
 
     private CardioExerciseModel mCardioExerciseModel;
-
-    public MainActivity setCardioExerciseModel(final CardioExerciseModel cardioExerciseModel) {
-        mCardioExerciseModel = cardioExerciseModel;
-        return this;
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         setToolbar();
-        setEditText(mCardioExerciseModel);
-        setCardioExerciseModel(new CardioExerciseModel());
+        if (getIntent().getExtras() != null) {
+            mCardioExerciseModel = getIntent().getExtras().getParcelable("model");
+            setEditText(mCardioExerciseModel);
+        }
 
-        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        setSpinners();
+        createTextWatcher();
+        setTextWatcher();
 
-// Настраиваем адаптер
+        setViews();
+        //заглушка
+//        createModel();
+
+    }
+
+    private void setViews() {
+
+
+
+
+    }
+
+
+    private void setTextWatcher() {
+        mTitle.addTextChangedListener(mTextWatcher);
+        mLowIntensity.addTextChangedListener(mTextWatcher);
+        mMiddleIntensity.addTextChangedListener(mTextWatcher);
+        mHighIntensity.addTextChangedListener(mTextWatcher);
+    }
+
+    private void setSpinners() {
         ArrayAdapter<?> adapter = ArrayAdapter
                 .createFromResource(this, R.array.calc_calories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCountCalMethod.setAdapter(adapter);
+        mCountCalMethod.setOnItemClickListener((parent, view, position, id) -> {
 
-//        ArrayAdapter<?> adapter2 = ArrayAdapter
-//                .createFromResource(this, R.array.type_of_intensity, android.R.layout.simple_spinner_item);
-//        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        });
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
-                mCardioExerciseModel.getIntensityType());
-
-// Вызываем адаптер
-        spinner.setAdapter(adapter);
-        spinner2.setAdapter(adapter2);
+        ArrayAdapter<?> adapter2 = ArrayAdapter
+                .createFromResource(this, R.array.type_of_intensity, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mIntensityType.setAdapter(adapter2);
     }
 
     private void setEditText(CardioExerciseModel cardioExerciseModel) {
-        exTitle = (EditText) findViewById(R.id.ex_title);
-        exSets = (EditText) findViewById(R.id.ex_sets);
-        exRepeats = (EditText) findViewById(R.id.ex_repeats);
-        exWeight = (EditText) findViewById(R.id.ex_weight);
         if (cardioExerciseModel != null) {
-
-            exTitle.setText(cardioExerciseModel.getExerciseTitle());
-            exSets.setText(cardioExerciseModel.getLowIntensity());
-            exRepeats.setText(cardioExerciseModel.getMiddleIntensity());
-            exWeight.setText(cardioExerciseModel.getHighIntensity());
+            mTitle.setText(cardioExerciseModel.getExerciseTitle());
+            mLowIntensity.setText(String.valueOf(cardioExerciseModel.getLowIntensity()));
+            mMiddleIntensity.setText(String.valueOf(cardioExerciseModel.getMiddleIntensity()));
+            mHighIntensity.setText(String.valueOf(cardioExerciseModel.getHighIntensity()));
         }
+    }
+
+    private void createTextWatcher() {
         mTextWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(final CharSequence s, final int start, final int count,
@@ -96,50 +129,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
-        exTitle.addTextChangedListener(mTextWatcher);
-        exSets.addTextChangedListener(mTextWatcher);
-        exRepeats.addTextChangedListener(mTextWatcher);
-        exWeight.addTextChangedListener(mTextWatcher);
-//        setListener(exSets);
-//        setListener(exTitle);
-//        setListener(exRepeats);
-//        setListener(exWeight);
+    }
 
+    public void setCardioExerciseModel(final CardioExerciseModel cardioExerciseModel) {
+        mCardioExerciseModel = cardioExerciseModel;
     }
 
     void setToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle("Новое упражнение");
-        setSupportActionBar(mToolbar);
+//        mToolbar.setTitle("Новое упражнение");
         mToolbar.inflateMenu(R.menu.menu);
+        setSupportActionBar(mToolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Новое упражнение");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
         mToolbar.setNavigationOnClickListener(this);
-        mToolbar.setNavigationIcon(R.drawable.arrow_back);
     }
 
-    private boolean saveExercise() {
-        if (exTitle.getText().length() == 0) {
+    private boolean saveExercise(@IntensityType int intensityType) {
+
+        if (mTitle.getText().length() == 0) {
             Toast.makeText(this, "Ойойой1", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (exSets.getText().length() == 0) {
-            Toast.makeText(this, "Ойойой2", Toast.LENGTH_SHORT).show();
-            return false;
+        if(intensityType == CardioExerciseModel.TYPE_SPECIFY){
+
+            if (mLowIntensity.getText().length() == 0) {
+                Toast.makeText(this, "Ойойой2", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if (mMiddleIntensity.getText().length() == 0) {
+                Toast.makeText(this, "Ойойой3", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if (mHighIntensity.getText().length() == 0) {
+                Toast.makeText(this, "Ойойой4", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            mCardioExerciseModel.setExerciseTitle(String.valueOf(mTitle.getText()))
+                    .setLowIntensity(Integer.parseInt(String.valueOf(mLowIntensity.getText())))
+                    .setMiddleIntensity(Integer.parseInt(String.valueOf(mMiddleIntensity.getText())))
+                    .setHighIntensity(Integer.parseInt(String.valueOf(mHighIntensity.getText())));
+        } else {
+            if (mBurnedPerHour.getText().length() == 0){
+                Toast.makeText(this, "Ойойой5", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            mCardioExerciseModel.setExerciseTitle(String.valueOf(mTitle.getText()))
+                    .setBurnedPerHour(Integer.parseInt(String.valueOf(mBurnedPerHour.getText())));
         }
-        if (exRepeats.getText().length() == 0) {
-            Toast.makeText(this, "Ойойой3", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (exWeight.getText().length() == 0) {
-            Toast.makeText(this, "Ойойой4", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        mCardioExerciseModel.setExerciseTitle(String.valueOf(exTitle.getText()))
-                .setLowIntensity(Integer.parseInt(String.valueOf(exSets.getText())))
-                .setMiddleIntensity(Integer.parseInt(String.valueOf(exRepeats.getText())))
-                .setHighIntensity(Integer.parseInt(String.valueOf(exWeight.getText())));
         return true;
     }
-
 
     @Override
     public void onClick(final View v) {
@@ -157,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.save) {
-            boolean qwe = saveExercise();
+            boolean qwe = saveExercise(mCardioExerciseModel.getIntensityType());
             if (qwe) {
                 Toast.makeText(this, "SAVE", Toast.LENGTH_SHORT).show();
                 finish();
@@ -165,5 +207,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return qwe;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createModel() {
+        mCardioExerciseModel = new CardioExerciseModel();
+        mCardioExerciseModel.setExerciseTitle("Жим органики челюстями")
+                .setCountCalMethod(CardioExerciseModel.METHOD_MET_VALUES)
+                .setIntensityType(CardioExerciseModel.TYPE_SPECIFY)
+                ;
     }
 }
