@@ -1,7 +1,11 @@
 package com.khavronsky.addnewcardioex;
 
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -12,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -70,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private CardioExerciseModel mCardioExerciseModel = new CardioExerciseModel();
 
+    AlertDialog.Builder mBuilder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +93,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setHintFromSelectedCountingMethod(mCountCalMethod.getSelectedItemPosition());
         createTextWatcher();
         setTextWatcher();
+
+        createAlertDialogWithPicker();
+    }
+
+    private int createAlertDialogWithPicker() {
+        int result = -1;
+        String okBtn = "OK";
+        String cancelBtn = "CANCEL";
+        NumberPicker numberPicker = new NumberPicker(this);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(10);
+        mBuilder = new AlertDialog.Builder(this);
+        mBuilder.setView(numberPicker);
+        mBuilder.setPositiveButton(okBtn, new OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+                numberPicker.getValue();
+            }
+        });
+        mBuilder.setNegativeButton(cancelBtn, new OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+            }
+        });
+        mBuilder.setCancelable(true);
+        mBuilder.setOnCancelListener(new OnCancelListener() {
+            public void onCancel(DialogInterface dialog) {
+
+            }
+        });
+        return result;
     }
 
 
@@ -258,7 +294,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(final View v) {
-        onBackPressed();
+
+        mBuilder.show();
+
+//        onBackPressed();
     }
 
     @Override
