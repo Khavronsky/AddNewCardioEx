@@ -43,7 +43,6 @@
     <style name="EditText" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorBackground">@color/app_bar</item>
         <item name="android:textColorPrimary">@color/gray3</item>
-        <item name="android:textColor">@color/red</item>
         <item name="colorAccent">@color/gray2</item>
     </style>
     <!--Floating label text style-->

@@ -115,71 +115,91 @@
                 </FrameLayout>
             </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content">
 
-                app:errorTextAppearance="@style/HintTextStyle">
 
-                <EditText
-                    android:id="@+id/ex_cardio_burned_per_hour"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/ex_cardio_burned_per_hour_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Сожжено калорий в час"
-                    android:inputType="number"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="8dp"
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                    app:errorTextAppearance="@style/HintTextStyle">
 
-                app:errorTextAppearance="@style/HintTextStyle">
+                    <EditText
+                        android:id="@+id/ex_cardio_burned_per_hour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        app:errorTextAppearance="@style/HintTextStyle"/>
 
-                <EditText
-                    android:id="@+id/ex_cardio_low_intensity"
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/ex_cardio_intensity_fields"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Низкая нагрузка (значение МЕТ)"
-                    android:inputType="number"
-                    android:textSize="16sp" />
+                    android:orientation="vertical">
 
-            </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/ex_cardio_low_intensity_layout"
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:errorEnabled="false"
-                app:errorTextAppearance="@style/HintTextStyle">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
 
-                <EditText
-                    android:id="@+id/ex_cardio_middle_intensity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Средняя нагрузка (значение МЕТ)"
-                    android:inputType="number"
-                    android:textSize="16sp" />
-            </android.support.design.widget.TextInputLayout>
+                        app:errorTextAppearance="@style/HintTextStyle">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:errorEnabled="false"
-                app:errorTextAppearance="@style/HintTextStyle">
+                        <EditText
+                            android:id="@+id/ex_cardio_low_intensity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
-                <EditText
-                    android:id="@+id/ex_cardio_high_intensity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Высокая нагрузка (значение МЕТ)"
-                    android:inputType="number"
-                    android:textSize="16sp" />
-            </android.support.design.widget.TextInputLayout>
+                            android:hint="Низкая нагрузка (значение МЕТ)"
+                            android:inputType="number"
+                            android:textSize="16sp" />
 
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/ex_cardio_middle_intensity_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:errorEnabled="false"
+                        app:errorTextAppearance="@style/HintTextStyle">
+
+                        <EditText
+                            android:id="@+id/ex_cardio_middle_intensity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Средняя нагрузка (значение МЕТ)"
+                            android:inputType="number"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/ex_cardio_high_intensity_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:errorEnabled="false"
+                        app:errorTextAppearance="@style/HintTextStyle">
+
+                        <EditText
+                            android:id="@+id/ex_cardio_high_intensity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Высокая нагрузка (значение МЕТ)"
+                            android:inputType="number"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"

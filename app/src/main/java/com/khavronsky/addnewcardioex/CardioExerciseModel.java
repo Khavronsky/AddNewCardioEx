@@ -32,7 +32,8 @@ class CardioExerciseModel implements Parcelable {
     private int mMiddleIntensity;
     private int mHighIntensity;
 
-
+    public CardioExerciseModel() {
+    }
 
     public String getExerciseTitle() {
         return mExerciseTitle;
