@@ -45,6 +45,9 @@
                     android:layout_height="wrap_content"
                     android:hint="Название упражнения"
                     android:inputType="text"
+
+
+                    android:maxLines="1"
                     android:textColor="@color/gray5"
                     android:textSize="16sp" />
             </android.support.design.widget.TextInputLayout>
@@ -125,16 +128,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-
+                    android:focusable="false"
                     app:errorTextAppearance="@style/HintTextStyle">
 
                     <EditText
                         android:id="@+id/ex_cardio_burned_per_hour"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:cursorVisible="false"
                         android:inputType="number"
                         android:textSize="16sp"
-                        app:errorTextAppearance="@style/HintTextStyle"/>
+                        app:errorTextAppearance="@style/HintTextStyle" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -150,14 +155,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-
+                        android:focusable="false"
                         app:errorTextAppearance="@style/HintTextStyle">
 
                         <EditText
                             android:id="@+id/ex_cardio_low_intensity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
+                            android:focusable="false"
+                            android:cursorVisible="false"
                             android:hint="Низкая нагрузка (значение МЕТ)"
                             android:inputType="number"
                             android:textSize="16sp" />
@@ -169,6 +175,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:focusable="false"
                         app:errorEnabled="false"
                         app:errorTextAppearance="@style/HintTextStyle">
 
@@ -176,6 +183,8 @@
                             android:id="@+id/ex_cardio_middle_intensity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:cursorVisible="false"
                             android:hint="Средняя нагрузка (значение МЕТ)"
                             android:inputType="number"
                             android:textSize="16sp" />
@@ -186,6 +195,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:focusable="false"
                         app:errorEnabled="false"
                         app:errorTextAppearance="@style/HintTextStyle">
 
@@ -193,6 +203,8 @@
                             android:id="@+id/ex_cardio_high_intensity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:cursorVisible="false"
                             android:hint="Высокая нагрузка (значение МЕТ)"
                             android:inputType="number"
                             android:textSize="16sp" />

@@ -27,10 +27,10 @@ class CardioExerciseModel implements Parcelable {
     private String mExerciseTitle;
     private int mCountCalMethod;
     private int mIntensityType;
-    private int mBurnedPerHour;
-    private int mLowIntensity;
-    private int mMiddleIntensity;
-    private int mHighIntensity;
+    private float mBurnedPerHour;
+    private float mLowIntensity;
+    private float mMiddleIntensity;
+    private float mHighIntensity;
 
     public CardioExerciseModel() {
     }
@@ -64,38 +64,38 @@ class CardioExerciseModel implements Parcelable {
         return this;
     }
 
-    public int getBurnedPerHour() {
+    public float getBurnedPerHour() {
         return mBurnedPerHour;
     }
 
-    public CardioExerciseModel setBurnedPerHour(final int burnedPerHour) {
+    public CardioExerciseModel setBurnedPerHour(final float burnedPerHour) {
         mBurnedPerHour = burnedPerHour;
         return this;
     }
 
-    public int getLowIntensity() {
+    public float getLowIntensity() {
         return mLowIntensity;
     }
 
-    public CardioExerciseModel setLowIntensity(final int lowIntensity) {
+    public CardioExerciseModel setLowIntensity(final float lowIntensity) {
         this.mLowIntensity = lowIntensity;
         return this;
     }
 
-    public int getMiddleIntensity() {
+    public float getMiddleIntensity() {
         return mMiddleIntensity;
     }
 
-    public CardioExerciseModel setMiddleIntensity(final int middleIntensity) {
+    public CardioExerciseModel setMiddleIntensity(final float middleIntensity) {
         this.mMiddleIntensity = middleIntensity;
         return this;
     }
 
-    public int getHighIntensity() {
+    public float getHighIntensity() {
         return mHighIntensity;
     }
 
-    public CardioExerciseModel setHighIntensity(final int highIntensity) {
+    public CardioExerciseModel setHighIntensity(final float highIntensity) {
         this.mHighIntensity = highIntensity;
         return this;
     }
@@ -136,9 +136,9 @@ class CardioExerciseModel implements Parcelable {
         dest.writeString(mExerciseTitle);
         dest.writeInt(mCountCalMethod);
         dest.writeInt(mIntensityType);
-        dest.writeInt(mBurnedPerHour);
-        dest.writeInt(mLowIntensity);
-        dest.writeInt(mMiddleIntensity);
-        dest.writeInt(mHighIntensity);
+        dest.writeFloat(mBurnedPerHour);
+        dest.writeFloat(mLowIntensity);
+        dest.writeFloat(mMiddleIntensity);
+        dest.writeFloat(mHighIntensity);
     }
 }

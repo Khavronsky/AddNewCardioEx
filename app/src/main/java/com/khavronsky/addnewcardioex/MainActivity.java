@@ -1,11 +1,10 @@
 package com.khavronsky.addnewcardioex;
 
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnClickListener;
+import com.khavronsky.addnewcardioex.imported.FloatNumPickerFragment;
+import com.khavronsky.addnewcardioex.imported.IDialogFragment;
+
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +27,7 @@ import static com.khavronsky.addnewcardioex.CardioExerciseModel.METHOD_CAL_PER_H
 import static com.khavronsky.addnewcardioex.CardioExerciseModel.METHOD_MET_VALUES;
 import static com.khavronsky.addnewcardioex.CardioExerciseModel.TYPE_NOT_SPECIFY;
 import static com.khavronsky.addnewcardioex.CardioExerciseModel.TYPE_SPECIFY;
+import static com.khavronsky.addnewcardioex.imported.FloatNumPickerFragment.EXTRA_DECIMAL_STEP_IS_01;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -71,15 +70,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.ex_cardio_Intensity_type)
     Spinner mIntensityType;
 
+    View.OnClickListener editTextListener;
+
     private TextWatcher mTextWatcher;
 
     private CardioExerciseModel mCardioExerciseModel = new CardioExerciseModel();
+    String my_best_picker = "my_best_picker";
 
-    AlertDialog.Builder mBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setToolbar();
@@ -92,45 +96,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextVisibility(mIntensityType.getSelectedItemPosition());
         setHintFromSelectedCountingMethod(mCountCalMethod.getSelectedItemPosition());
         createTextWatcher();
+
+        editTextListener = v -> {
+            showPicker((EditText) v);
+        };
         setTextWatcher();
-
-        createAlertDialogWithPicker();
     }
 
-    private int createAlertDialogWithPicker() {
-        int result = -1;
-        String okBtn = "OK";
-        String cancelBtn = "CANCEL";
-        NumberPicker numberPicker = new NumberPicker(this);
-        numberPicker.setMinValue(1);
-        numberPicker.setMaxValue(10);
-        mBuilder = new AlertDialog.Builder(this);
-        mBuilder.setView(numberPicker);
-        mBuilder.setPositiveButton(okBtn, new OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) {
-                numberPicker.getValue();
+    void showPicker(EditText editText) {
+       FloatNumPickerFragment dialog= (FloatNumPickerFragment) getSupportFragmentManager().findFragmentByTag
+               (my_best_picker);
+        if(dialog!=null)return;
+        dialog = new FloatNumPickerFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("min_value", 0);
+        bundle.putInt("max_value", 2);
+        float curVal = 1;
+        if(editText.getText().length() != 0) curVal = Float.parseFloat(String.valueOf(editText.getText()));
+        bundle.putFloat("current_value", curVal);
+        bundle.putBoolean(EXTRA_DECIMAL_STEP_IS_01, true);
+//        bundle.putInt("one_point_value", 1);
+        dialog.setArguments(bundle);
+        dialog.setCallback(new IDialogFragment() {
+            @Override
+            public void doButtonClick1(final Object o) {
+                editText.setText(String.valueOf(o));
             }
-        });
-        mBuilder.setNegativeButton(cancelBtn, new OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) {
+
+            @Override
+            public void doButtonClick2() {
             }
-        });
-        mBuilder.setCancelable(true);
-        mBuilder.setOnCancelListener(new OnCancelListener() {
-            public void onCancel(DialogInterface dialog) {
+
+            @Override
+            public void doByDismissed() {
+
 
             }
         });
-        return result;
+
+        dialog.show(getSupportFragmentManager(), my_best_picker);
     }
+
 
 
     private void setTextWatcher() {
-        mBurnedPerHour.addTextChangedListener(mTextWatcher);
-        mTitle.addTextChangedListener(mTextWatcher);
-        mLowIntensity.addTextChangedListener(mTextWatcher);
-        mMiddleIntensity.addTextChangedListener(mTextWatcher);
-        mHighIntensity.addTextChangedListener(mTextWatcher);
+//        mTitle.addTextChangedListener(mTextWatcher);
+
+        mBurnedPerHour.setOnClickListener(editTextListener);
+        mLowIntensity.setOnClickListener(editTextListener);
+        mMiddleIntensity.setOnClickListener(editTextListener);
+        mHighIntensity.setOnClickListener(editTextListener);
     }
 
     private void setSpinners() {
@@ -224,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 } catch (NumberFormatException e) {
                 }
-                if(s.length() > 6){
+                if (s.length() > 10) {
                     Toast.makeText(MainActivity.this, "Ой ой ой! \nОсеня мунога букавка твоя писать",
                             Toast.LENGTH_SHORT).show();
                     s.delete(0, 1);
@@ -275,9 +290,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .setIntensityType(TYPE_SPECIFY)
                     .setCountCalMethod(mCountCalMethod.getSelectedItemPosition() == 0 ? METHOD_CAL_PER_HOUR
                             : METHOD_MET_VALUES)
-                    .setLowIntensity(Integer.parseInt(String.valueOf(mLowIntensity.getText())))
-                    .setMiddleIntensity(Integer.parseInt(String.valueOf(mMiddleIntensity.getText())))
-                    .setHighIntensity(Integer.parseInt(String.valueOf(mHighIntensity.getText())));
+                    .setLowIntensity(Float.parseFloat(String.valueOf(mLowIntensity.getText())))
+                    .setMiddleIntensity(Float.parseFloat(String.valueOf(mMiddleIntensity.getText())))
+                    .setHighIntensity(Float.parseFloat(String.valueOf(mHighIntensity.getText())));
         } else {
             if (mBurnedPerHour.getText().length() == 0) {
                 Toast.makeText(this, "Ойойой5", Toast.LENGTH_SHORT).show();
@@ -285,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             mCardioExerciseModel.setExerciseTitle(String.valueOf(mTitle.getText()))
                     .setIntensityType(TYPE_NOT_SPECIFY)
-                    .setBurnedPerHour(Integer.parseInt(String.valueOf(mBurnedPerHour.getText())));
+                    .setBurnedPerHour(Float.parseFloat(String.valueOf(mBurnedPerHour.getText())));
         }
         showSavedToast();
 
@@ -294,10 +309,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(final View v) {
-
-        mBuilder.show();
-
-//        onBackPressed();
+        onBackPressed();
     }
 
     @Override
